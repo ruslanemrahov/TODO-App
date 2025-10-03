@@ -1,0 +1,234 @@
+:root {
+  --bg-dark: #0a0e27;
+  --bg-card: #1a1f3a;
+  --bg-input: #151932;
+  --accent: #00ffc4;
+  --accent-hover: #00e6b0;
+  --text: #ffffff;
+  --text-dim: #8b92b5;
+  --text-checked: #4a5177;
+  --danger: #ff4757;
+  --radius: 16px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, sans-serif;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, var(--accent) 0%, #00d4aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 2rem 0 3rem;
+  text-align: center;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 600px;
+}
+
+form {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+#todo-input {
+  width: 100%;
+  padding: 1rem 140px 1rem 1.5rem;
+  background: var(--bg-input);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+#todo-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(0, 255, 196, 0.1);
+}
+
+#todo-input::placeholder {
+  color: var(--text-dim);
+}
+
+#add-button {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--accent);
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1.75rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#add-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-50%) scale(1.05);
+}
+
+#add-button:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+#todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.todo {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.todo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.custom-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.custom-checkbox svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+}
+
+input[type="checkbox"]:checked ~ .custom-checkbox {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+input[type="checkbox"]:checked ~ .custom-checkbox svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 1rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+input[type="checkbox"]:checked ~ .todo-text {
+  text-decoration: line-through;
+  color: var(--text-checked);
+  opacity: 0.6;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.delete-button:hover {
+  background: rgba(255, 71, 87, 0.1);
+}
+
+.delete-button svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--text-dim);
+  transition: all 0.3s ease;
+}
+
+.delete-button:hover svg {
+  fill: var(--danger);
+  transform: scale(1.1);
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 1rem 0.75rem;
+  }
+
+  h1 {
+    margin: 1rem 0 2rem;
+  }
+
+  #todo-input {
+    padding: 1rem 1.25rem;
+  }
+
+  #add-button {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 1rem;
+  }
+
+  #add-button:hover {
+    transform: scale(1.02);
+  }
+
+  .todo {
+    padding: 0.875rem 1rem;
+  }
+}
