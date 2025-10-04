@@ -1,64 +1,62 @@
-# Todo App
+# Secure Todo App - XSS Security Study
 
-Sadə və təhlükəsiz todo tətbiqi - Vanilla JavaScript ilə hazırlanmışdır.
+Vanilla JavaScript ilə hazırlanmış todo tətbiqi. Əsas məqsəd: XSS və JavaScript təhlükəsizlik zəifliklərini praktik öyrənmək.
 
-## Xüsusiyyətlər
+## Nə Etdim?
 
-- Todo əlavə et, işarələ və sil
-- LocalStorage ilə avtomatik saxlama
-- Modern və responsive dizayn
-- XSS hücumlarından qorunma
-- Sürətli və yüngül (xarici kitabxana yoxdur)
+1. Əvvəlcə zəif kod yazdım (innerHTML istifadə)
+2. Müxtəif XSS hücumlarını test etdim
+3. 20+ təhlükəsizlik layeri əlavə etdim
+4. İndi heç bir XSS mümkün deyil
+
+## Təhlükəsizlik Xüsusiyyətləri
+
+- `textContent` istifadəsi (innerHTML yox)
+- 21 XSS pattern detection
+- Unicode homoglyph bloklama
+- HTML entity escape
+- Input validation və sanitization
+- LocalStorage təhlükəsizliyi
+- Double normalization check
+
+## Bloklanmış Hücumlar
+
+```javascript
+<script>alert(1)</script>           // Classic XSS
+<img src=x onerror="alert(1)">      // Event handler
+javascript:alert(1)                  // Protocol
+<scrіpt>alert(1)</scrіpt>           // Cyrillic bypass
+data:text/html;base64,...            // Data URL
+&#60;script&#62;                     // HTML entity
+＜script＞                           // Fullwidth Unicode
+```
+
+## Texnologiyalar
+
+- Vanilla JavaScript (heç bir framework)
+- HTML5 & CSS3
+- LocalStorage
+- DOM API
 
 ## Quraşdırma
 
 ```bash
-git clone https://github.com/username/todo-app.git
-cd todo-app
+git clone https://github.com/username/secure-todo-app.git
+cd secure-todo-app
 ```
 
-Faylları brauzerdə açın - heç bir əlavə konfiqurasiya lazım deyil!
+Brauzerdə `index.html` açın - hazırdır!
 
-## Fayl Strukturu
+## Struktur
 
 ```
-todo-app/
-├── index.html    # HTML strukturu
-├── style.css     # Dizayn və animasiyalar
-└── script.js     # Əsas məntiq
+├── index.html    # HTML
+├── style.css     # Dizayn
+└── script.js     # Təhlükəsizlik + Məntiq
 ```
 
-## İstifadə
+## Öyrənmə Məqsədi
 
-1. **Todo əlavə et**: Input-a yazın və Enter basın
-2. **İşarələ**: Checkbox-a klikləyin
-3. **Sil**: Zibil qutusu ikonuna klikləyin
+Bu layihə XSS və JavaScript təhlükəsizliyini praktik anlamaq üçün hazırlanıb. Real production tətbiqlərində əlavə server-side validation və CSP header-lər lazımdır.
 
-## Təhlükəsizlik
-
-XSS hücumlarından qorunma üçün:
-- `textContent` istifadə edilir (`innerHTML` yox)
-- DOM API ilə elementlər yaradılır
-- İstifadəçi daxiletmələri HTML kimi render edilmir
-
-## Texnologiyalar
-
-- **HTML5** - Struktur
-- **CSS3** - Dizayn (gradient, animasiyalar, responsive)
-- **JavaScript ES6+** - Məntiq
-- **LocalStorage** - Data saxlama
-
-## Dizayn
-
-**Rəng palitrası:**
-- Qaranlıq mavi arxa fon
-- Yaşıl-mavi (#00ffc4) vurğu rəngi
-- Smooth animasiyalar və hover effektləri
-
-**Responsive:**
-- Desktop və mobil versiyalar
-- Mobile-də düymə tam genişlikdə
-
-## Lisenziya
-
-This project is for educational purposes and is open source.
+---
